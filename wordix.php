@@ -27,7 +27,10 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- *  ****COMPLETAR*****
+ *  Ingresar un numero que se encuentre entre dos numeros.
+ * @param int $min
+ * @param int $max
+ * @return int
  */
 function solicitarNumeroEntre($min, $max)
 {
@@ -120,7 +123,8 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * Escribe un mensaje de bienvenida al usuario
+ * @param string $usuario
  */
 function escribirMensajeBienvenida($usuario)
 {
@@ -133,7 +137,9 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- * ****COMPLETAR*****
+ * Verifica si los caracteres de un string son alfabéticos
+ * @param string $cadena
+ * @return boolean
  */
 function esPalabra($cadena)
 {
@@ -149,14 +155,15 @@ function esPalabra($cadena)
 }
 
 /**
- *  ****COMPLETAR*****
+ *  Lee una palabra y verifica que sea palabra alfabetica de 5 letras
+ * @return string
  */
 function leerPalabra5Letras()
 {
     //string $palabra
     echo "Ingrese una palabra de 5 letras: ";
     $palabra = trim(fgets(STDIN));
-    $palabra  = strtoupper($palabra);
+    $palabra  = strtoupper($palabra); /* Convierte un string a mayúsculas */
 
     while ((strlen($palabra) != 5) || !esPalabra($palabra)) {
         echo "Debe ingresar una palabra de 5 letras:";
@@ -168,6 +175,7 @@ function leerPalabra5Letras()
 
 /**
  * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
+ * Inicia una estructura asociativa de datos Teclado. 
  *@return array
  */
 function iniciarTeclado()
