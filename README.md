@@ -10,6 +10,6 @@ Tecnicatura en Desarrollo Web
 Facultad de Informática
 Universidad Nacional del Comahue
 
-# Integrantes del grupo
+# Integrantes del grupo N°22
 
 - **Paloma Stucke** - FAI-5544
