@@ -13,3 +13,4 @@ Universidad Nacional del Comahue
 # Integrantes del grupo N°22
 
 - **Paloma Stucke** - FAI-5544
+- **Carlos Barrera** - FAI-1782
