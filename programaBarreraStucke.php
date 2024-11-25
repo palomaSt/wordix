@@ -100,6 +100,34 @@ function ingresaPalabra()
 }
 
 /**
+ * Muestra en pantalla los datos de la partida seleccionada por el usuario
+ * @param int $numeroDePartida
+ * @param array $coleccionPartidas
+ */
+function mostrarPartida($numeroDePartida,$coleccionPartidas)
+{
+    $numeroDePartidaEnArreglo=$numeroDePartida-1;
+    if($numeroDePartidaEnArreglo>count($coleccionPartidas))
+    {
+        echo "Error, reingrese un número de partida correcto";
+    }
+    else
+    {
+        echo "Partida WORDIX ".$numeroDePartidaEnArreglo.": palabra ".$coleccionPartidas[$numeroDePartidaEnArreglo]["palabraWordix"];
+        echo "Jugador: ".$coleccionPartidas[$numeroDePartidaEnArreglo]["jugador"];
+        echo "Puntaje: ".$coleccionPartidas[$numeroDePartidaEnArreglo]["puntaje"];
+        if($coleccionPartidas[$numeroDePartidaEnArreglo]["intentos"]==0)
+        {
+            echo "Intento: No adivinó la palabra";
+        }
+        else
+        {
+            echo "Intentos: ".$coleccionPartidas[$numeroDePartidaEnArreglo]["intentos"];
+        }
+    }
+}
+
+/**
  * Agrega una palabra a una colección de palabras
  * @param array $coleccionPalabras Colección de palabras
  * @param string $palabra
