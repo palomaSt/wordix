@@ -154,7 +154,7 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
     $partidaGanada=0;
     do{
         //Buscamos un puntaje mayor a 0 
-        $partidaGanada= $coleccionPartidas[$indice]["jugador"->$jugador]["puntaje"];
+        $partidaGanada= $coleccionPartidas["jugador"->$jugador]["puntaje"];
 
         $indice++;
     }while($indice<$cantPartidas && $partidaGanada==0);
