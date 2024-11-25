@@ -167,7 +167,7 @@ function solicitarJugador()
 {
     do{
         echo "Ingrese el nombre de un jugador:";
-        $nombre= strtolower(trim(fgets(STIN)));
+        $nombre= strtolower(trim(fgets(STDIN)));
         $primerCaracter= substr($nombre, 0, 1);
         $esString= is_string($primerCaracter);
         if(!$esString){
