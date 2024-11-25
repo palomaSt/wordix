@@ -106,24 +106,16 @@ function ingresaPalabra()
  */
 function mostrarPartida($numeroDePartida,$coleccionPartidas)
 {
-    $numeroDePartidaEnArreglo=$numeroDePartida-1;
-    if($numeroDePartidaEnArreglo>count($coleccionPartidas))
+    echo "Partida WORDIX ".($numeroDePartida-1).": palabra ".$coleccionPartidas[($numeroDePartida-1)]["palabraWordix"];
+    echo "Jugador: ".$coleccionPartidas[($numeroDePartida-1)]["jugador"];
+    echo "Puntaje: ".$coleccionPartidas[($numeroDePartida-1)]["puntaje"];
+    if($coleccionPartidas[($numeroDePartida-1)]["intentos"]==0)
     {
-        echo "Error, reingrese un número de partida correcto";
+        echo "Intento: No adivinó la palabra";
     }
     else
     {
-        echo "Partida WORDIX ".$numeroDePartidaEnArreglo.": palabra ".$coleccionPartidas[$numeroDePartidaEnArreglo]["palabraWordix"];
-        echo "Jugador: ".$coleccionPartidas[$numeroDePartidaEnArreglo]["jugador"];
-        echo "Puntaje: ".$coleccionPartidas[$numeroDePartidaEnArreglo]["puntaje"];
-        if($coleccionPartidas[$numeroDePartidaEnArreglo]["intentos"]==0)
-        {
-            echo "Intento: No adivinó la palabra";
-        }
-        else
-        {
-            echo "Intentos: ".$coleccionPartidas[$numeroDePartidaEnArreglo]["intentos"];
-        }
+        echo "Intentos: ".$coleccionPartidas[($numeroDePartida-1)]["intentos"];
     }
 }
 
@@ -170,6 +162,8 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
+
+//LA FUNCION MOSTRARPARTIDA: chequear con seleccionarNumeroEntre antes de invocarla.
 
 //Declaración de variables:
 
