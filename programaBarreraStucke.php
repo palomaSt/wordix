@@ -57,7 +57,21 @@ function seleccionarOpcion()
     return $opcion;
 }
 
-
+/**
+ * Pide al usuario que ingrese una palabra de 5 letras
+ * @return string
+ */
+function ingresaPalabra()
+{
+    echo "Ingrese una palabra de 5 letras:";
+    $palabra= strtoupper(trim(fgets(STDIN)));
+    $cantCaracteres= strlen($palabra);
+    if ($cantCaracteres!= 5){
+        echo "Palabra inválida, debe ser de 5 letras.";
+    }
+    
+    return $palabra;
+}
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
