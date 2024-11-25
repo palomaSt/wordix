@@ -57,6 +57,30 @@ function cargarPartidas()
 }
 
 /**
+ * Retorna el resumen de un jugador.
+ * @param array $coleccionPartidas Colección de partidas.
+ * @param string $jugador Nombre del jugador.
+ * @return array Resumen del jugador.
+ */
+function resumenJugador($jugador) 
+{
+    $resumen = 
+    [
+        "jugador" => $jugador,
+        "partidas" => 0,
+        "puntaje" => 0,
+        "victorias" => 0,
+        "intento1" => 0,
+        "intento2" => 0,
+        "intento3" => 0,
+        "intento4" => 0,
+        "intento5" => 0,
+        "intento6" => 0
+    ];
+    return $resumen;
+}
+
+/**
  * Visualiza el menú de opciones y solicita al usuario una opción válida
  * @return int
  */
@@ -146,40 +170,17 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
     $partidaGanada=0;
     do{
         //Buscamos un puntaje mayor a 0 
-        $puntajePartida= $coleccionPartidas["jugador"==$jugador]["puntaje"];
+        $partidaGanada=$coleccionPartidas['jugador']==$jugador["puntaje"];
 
         $indice++;
-    }while($indice<$cantPartidas && $puntajePartida==0);
+    }while($indice<$cantPartidas && $partidaGanada==0);
     
-    if($puntajePartida===0){
+    if($partidaGanada===0){
         $indice=0;
     }
 
     return $indice-1;
 }
-
-
-/**
- * Solicita el nombre de un jugador, se asegura que este en minusculas y comience con una letra
- * @return string 
- */
-function solicitarJugador()
-{
-    do{
-        echo "Ingrese el nombre de un jugador:";
-        $nombre= strtolower(trim(fgets(STDIN)));
-        $primerCaracter= substr($nombre, 0, 1);
-        $esString= is_string($primerCaracter);
-        if(!$esString){
-            echo "Error, el nombre debe comenzar con una letra.";
-        }
-    }while($esString===true);
-
-    return $nombre;
-}
-
-
-
 
 
 /**************************************/
