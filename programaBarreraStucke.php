@@ -9,7 +9,7 @@ include_once("wordix.php");
 
 /* Stucke, Paloma. FAI-5544 . Tecnicatura en Desarrollo Web. paloma.stucke@est.fi.uncoma.edu.ar. palomaStucke */
 /* Barrera, Carlos. FAI-1782. Tecnicatura en Desarrollo Web. carlos.barrera@est.fi.uncoma.edu.ar. bcarlos1508 */
-/* ****COMPLETAR***** */
+
 
 
 /**************************************/
@@ -33,7 +33,7 @@ function cargarColeccionPalabras()
     return ($coleccionPalabras);
 }
 
-/* ****COMPLETAR***** */
+
 
 
 

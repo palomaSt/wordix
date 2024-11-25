@@ -337,50 +337,30 @@ function esIntentoGanado($estructuraPalabraIntento)
 
 /**
  * Determina el puntaje de la partida
- * @param array $estucturaPalabraIntento
- * @param int $nroIntento
+ * @param int $nroIntento Número de intentos realizados
+ * @param string $palabra Palabra adivinada
  * @return int
  */
-function obtenerPuntajeWordix($estructuraPalabraIntento, $nroIntento)  /* ****COMPLETAR***** parámetros formales necesarios */
+function obtenerPuntajeWordix($nroIntento, $palabra)  
 {
-    $puntaje=0;
-    switch ($nroIntento){
-        case 1:
-            $puntaje=6;
-            break;
-        case 2:
-            $puntaje=5;
-            break;
-        case 3:
-            $puntaje=4;
-            break;
-        case  4:
-            $puntaje=3;
-            break;
-        case 5:
-            $puntaje=2;
-            break;
-        case 6:
-            $puntaje=1;
-            break;
-    }
+    //Puntaje base según el número de intentos
+    $puntajeBase=7 -$nroIntento; //6 puntos si adivina en el primer intento, 5 en el segundo, etc.
 
-    $vocal= "AEIOU";
-    $consonanteHastaM= "BCDFGHJKLM";
-    $consonanteHastaZ= "NPQRSTVWXYZ";
-    
-    foreach($estructuraPalabraIntento as $letraIntento){
-        $letra=$letraIntento["letra"];
-        if(str_contains($letra, $vocal)){
-            $puntaje+=1;
-        }elseif(str_contains($letra, $consonanteHastaM)){
-            $puntaje+=2;
-        }elseif(str_contains($letra, $consonanteHastaZ)){
-            $puntaje+=3;
+    //Puntaje adicional por cada letra de la palabra
+    $puntajeLetras=0;
+
+    for($i=0;$i<5;$i++){
+        $letra= $palabra[$i];
+        if(in_array($letra,["A","E","I","O","U"])){
+            $puntajeLetras+=1; //Vocales valen 1 punto
+        }elseif($letra<="M"){
+            $puntajeLetras+=2; //Consonantes hasta la M inclusive valen 2 puntos
+        }else{
+            $punteLetras+=3; //Consonantes despues de la M valen 3 puntos
         }
     }
-    
-    return $puntaje;
+
+    return $puntajeBase + $puntajeLetras;
 }
 
 /**
