@@ -146,12 +146,12 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
     $partidaGanada=0;
     do{
         //Buscamos un puntaje mayor a 0 
-        $partidaGanada= $coleccionPartidas["jugador"->$jugador]["puntaje"];
+        $puntajePartida= $coleccionPartidas["jugador"==$jugador]["puntaje"];
 
         $indice++;
-    }while($indice<$cantPartidas && $partidaGanada==0);
+    }while($indice<$cantPartidas && $puntajePartida==0);
     
-    if($partidaGanada===0){
+    if($puntajePartida===0){
         $indice=0;
     }
 
@@ -165,10 +165,17 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
  */
 function solicitarJugador()
 {
-    echo "Ingrese el nombre de un jugador:";
-    $nombre=strtolower(trim(fgets(STDIN)));
-    $primerCaracter= substr($nombre,0,1);
+    do{
+        echo "Ingrese el nombre de un jugador:";
+        $nombre= strtolower(trim(fgets(STIN)));
+        $primerCaracter= substr($nombre, 0, 1);
+        $esString= is_string($primerCaracter);
+        if(!$esString){
+            echo "Error, el nombre debe comenzar con una letra.";
+        }
+    }while($esString===true);
 
+    return $nombre;
 }
 
 
