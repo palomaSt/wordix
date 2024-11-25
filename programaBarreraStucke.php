@@ -159,6 +159,22 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
 }
 
 
+/**
+ * Solicita el nombre de un jugador, se asegura que este en minusculas y comience con una letra
+ * @return string 
+ */
+function solicitarJugador()
+{
+    echo "Ingrese el nombre de un jugador:";
+    $nombre=strtolower(trim(fgets(STDIN)));
+    $primerCaracter= substr($nombre,0,1);
+
+}
+
+
+
+
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
