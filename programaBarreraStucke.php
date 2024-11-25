@@ -58,7 +58,6 @@ function cargarPartidas()
 
 /**
  * Retorna el resumen de un jugador.
- * @param array $coleccionPartidas Colección de partidas.
  * @param string $jugador Nombre del jugador.
  * @return array Resumen del jugador.
  */
