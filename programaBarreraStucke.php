@@ -99,6 +99,18 @@ function ingresaPalabra()
     return $palabra;
 }
 
+/**
+ * Agrega una palabra a una colección de palabras
+ * @param array $coleccionPalabras Colección de palabras
+ * @param string $palabra
+ * @return array Colección de palabras modificada
+ */ 
+function agregarPalabra($coleccionPalabras, $palabra)
+{
+    $coleccionPalabras[]= $palabra;
+
+    return $coleccionPalabras;
+}
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
