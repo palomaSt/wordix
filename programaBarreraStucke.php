@@ -111,6 +111,34 @@ function agregarPalabra($coleccionPalabras, $palabra)
 
     return $coleccionPalabras;
 }
+
+/**
+ * Busca la primer partida ganada de un jugador
+ * @param array $coleccionPartidas
+ * @param string $jugador
+ * @return int Indice de la partida, -1 si no ganó ninguna partida
+ */
+function primerPartidaGanada($coleccionPartidas, $jugador)
+{
+    $indice=0; //Indice de la partida que buscamos
+
+    $cantPartidas= count($coleccionPartidas);
+    $partidaGanada=0;
+    do{
+        //Buscamos un puntaje mayor a 0 
+        $partidaGanada= $coleccionPartidas[$indice]["jugador"->$jugador]["puntaje"];
+
+        $indice++;
+    }while($indice<$cantPartidas && $partidaGanada==0);
+
+    if($partidaGanada==0){
+        $indice=-1;
+    }
+    
+    return $indice;
+}
+
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
