@@ -148,7 +148,7 @@ function agregarPalabra($coleccionPalabras, $palabra)
  */
 function primerPartidaGanada($coleccionPartidas, $jugador)
 {
-    $indice=-1; //Indice de la partida que buscamos
+    $indice=0; //Indice de la partida que buscamos
 
     $cantPartidas= count($coleccionPartidas);
     $partidaGanada=0;
@@ -159,6 +159,10 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
         $indice++;
     }while($indice<$cantPartidas && $partidaGanada==0);
     
+    if($partidaGanada===0){
+        $indice=0;
+    }
+
     return $indice-1;
 }
 
