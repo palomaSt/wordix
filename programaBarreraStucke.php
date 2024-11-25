@@ -133,6 +133,8 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
 
     if($partidaGanada==0){
         $indice=-1;
+    }else{
+        $indice-=1;
     }
     
     return $indice;
