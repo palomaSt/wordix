@@ -34,7 +34,8 @@ function cargarColeccionPalabras()
 }
 
 /**
- * 
+ * Visualiza el menú de opciones y solita al usuario una opción válida
+ * @return int
  */
 function seleccionarOpcion()
 {
@@ -48,6 +49,8 @@ function seleccionarOpcion()
     echo "6) Mostrar listado de partidas ordenadas por jugador y por palabra";
     echo "7) Agregar una palabra de 5 letras a Wordix";
     echo "8) Salir";
+    echo "***************************************************\n";
+    echo "Seleccione una opción:";
 
     $opcion = solicitarNumeroEntre(1,8);
 
