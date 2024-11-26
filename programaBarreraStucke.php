@@ -16,6 +16,7 @@ include_once("wordix.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+
 /**
  * Obtiene una colección de palabras
  * @return array
@@ -33,11 +34,13 @@ function cargarColeccionPalabras()
     return ($coleccionPalabras);
 }
 
+
+
+
 /**
 * Carga una colección de partidas con ejemplos variados.
 * @return array
 */
-
 function cargarPartidas()
 {
    $coleccionPartidas=[];
@@ -56,28 +59,64 @@ function cargarPartidas()
    return ($coleccionPartidas);
 }
 
+
+
+
 /**
  * Retorna el resumen de un jugador.
+ * @param array $partidas Coleccion de partidas.
  * @param string $jugador Nombre del jugador.
  * @return array Resumen del jugador.
  */
-function resumenJugador($jugador) 
+function resumenJugador($partidas, $jugador) 
 {
+
+    foreach($partidas as $partida){
+        if($partida['jugador']=== $jugador){
+        
+            if($partida['puntaje']!=0){
+                $victorias++;
+                if($partida['intentos']===1){
+                    $intento1++;
+                }elseif($partida['intentos']===2){
+                    $intento2++;
+                }elseif($partida['intentos']===3){
+                    $intento3++;
+                }elseif($partida['intentos']===4){
+                    $intento4++;
+                }elseif($partida['intentos']===5){
+                    $intento5++;
+                }else{
+                    $intento6++;
+                }
+            }
+            
+            $contadorPartidas++;
+            $puntaje+= $partida['puntaje'];
+        }
+    }
+
     $resumen = 
     [
         "jugador" => $jugador,
-        "partidas" => 0,
-        "puntaje" => 0,
-        "victorias" => 0,
-        "intento1" => 0,
-        "intento2" => 0,
-        "intento3" => 0,
-        "intento4" => 0,
-        "intento5" => 0,
-        "intento6" => 0
+        "partidas" => $contadorPartidas,
+        "puntaje" => $puntaje,
+        "victorias" => $victorias,
+        "porcentajeVictorias"=> $victorias/$contadorPartidas,
+        "intento1" => $intento1,
+        "intento2" => $intento2,
+        "intento3" => $intento3,
+        "intento4" => $intento4,
+        "intento5" => $intento5,
+        "intento6" => $intento6
     ];
+    
+
     return $resumen;
 }
+
+
+
 
 /**
  * Visualiza el menú de opciones y solicita al usuario una opción válida
@@ -98,29 +137,13 @@ function seleccionarOpcion()
     echo "***************************************************\n";
     echo "Seleccione una opción:";
 
-    $opcion = solicitarNumeroEntre(1,8);
+    $opcion = solicitarNumeroEntre(1,7);
 
     return $opcion;
 }
 
-/**
- * Pide al usuario que ingrese una palabra de 5 letras
- * @return string
- */
-function ingresaPalabra()
-{
-    $cantCAracteres=0;
-    do{
-        echo "Ingrese una palabra de 5 letras:";
-        $palabra= strtoupper(trim(fgets(STDIN)));
-        $cantCaracteres= strlen($palabra);
-        if($cantCaracteres != 5){
-            echo "Palabra inválida, debe ser de 5 letras.";
-        }
-    }while($cantCaracteres === 5);
-    
-    return $palabra;
-}
+
+
 
 /**
  * Muestra en pantalla los datos de la partida seleccionada por el usuario
@@ -142,6 +165,9 @@ function mostrarPartida($numeroDePartida,$coleccionPartidas)
     }
 }
 
+
+
+
 /**
  * Agrega una palabra a una colección de palabras
  * @param array $coleccionPalabras Colección de palabras
@@ -154,6 +180,9 @@ function agregarPalabra($coleccionPalabras, $palabra)
 
     return $coleccionPalabras;
 }
+
+
+
 
 /**
  * Busca la primer partida ganada de un jugador
@@ -182,6 +211,8 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
 }
 
 
+
+
 /**
  * solicita el nombre de un jugador en minusculas
  * @return string $nombre
@@ -192,7 +223,7 @@ function solicitarJugador()
     do{
         echo "Ingrese el nombre de un jugador:";
         $nombre= strtolower(trim(fgets(STDIN)));
-        $primerCaracter= is_string(substr($nombre,0,1));
+        $primerCaracter= esPalabra(substr($nombre,0,1));
         if($primerCaracter === false){
             echo "Error, el nombre debe comenzar con una letra.";
         }else{
@@ -202,6 +233,9 @@ function solicitarJugador()
 
     return $nombre;
 }
+
+
+
 
 /**
  * Ordena y muestra las partidas por nombre de jugador y por palabra
@@ -232,6 +266,8 @@ function mostrarPartidasOrdenadas($partidas) {
 }
 
 
+
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -251,15 +287,46 @@ $partida = jugarWordix("MELON", strtolower("MaJo"));
 //imprimirResultado($partida);
 
 
+$partidas= cargarPartidas();
+$palabras= cargarColeccionPalabras();
 
-/*
+
 do {
-    $opcion = ...;
+    $opcion = seleccionarOpcion();
 
     
     switch ($opcion) {
         case 1: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+            $jugador= solicitarJugador();
+            do{
+                echo "Ingrese un número de palabra para jugar:";
+                $palabraElegida= trim(fgets(STDIN));
+
+                // Verifico que ingrese un caracter de tipo numerérico
+                $esLetra= esPalabra($palabraElegida); 
+                if($esLetra=== true){
+                    echo "Error, debe ser numérico";
+                }else{
+                    $palabraElegida= $palabras[$palabraElegida-1];
+
+                    //Verifico que no haya utilizado la palabra
+                    $palabraUsada= false;
+                    $n= count($partidas); //Cantidad de partidas
+                    $i=0;
+                    do{
+                      if($partidas['jugador']===$jugador){
+                            if($partidas['palabraWordix']===$palabraElegida){
+                                echo "Error, usted ya uso esta palabra.";
+                                $palabraUsada= true;
+                            }
+                        }
+                        $i++;
+                    }while($i<$n && !$palabraUsada);
+                }
+            }while(!$esLetra);
+
+            $partida= jugarWordix($palabraElegida,$jugador);
+            $partidas[]=$partida;
 
             break;
         case 2: 
@@ -273,5 +340,5 @@ do {
         
             //...
     }
-} while ($opcion != X);
-*/
+} while ($opcion != 8);
+
