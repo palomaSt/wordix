@@ -305,7 +305,7 @@ do {
                 echo "Ingrese un número de palabra para jugar:";
                 $palabraElegida= trim(fgets(STDIN));
 
-                // Verifico que ingrese un caracter de tipo numerérico
+                // Verifico que ingrese un caracter de tipo numérico
                 $esLetra= esPalabra($palabraElegida); 
                 if($esLetra=== true){
                     echo "Error, debe ser numérico";
@@ -332,16 +332,56 @@ do {
             $partidas[]=$partida;
 
             break;
-        case 2: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
+        case 2:
+            $jugador= solicitarJugador();
+            $numeroPalabra = rand(0, count($coleccionPalabras) - 1);
+            $palabraAleatoria = $coleccionPalabras[$numeroPalabra];
+            $palabraElegida=$palabraAleatoria;
+            do
+            {
+                //Verifico que no haya utilizado la palabra
+                $palabraUsada= false;
+                $n= count($partidas); //Cantidad de partidas
+                $i=0;
+                do{
+                    if($partidas['jugador']===$jugador){
+                        if($partidas['palabraWordix']===$palabraElegida){
+                            echo "Error, usted ya uso esta palabra.";
+                            $palabraUsada= true;
+                        }
+                    }
+                    $i++;
+                }
+                while($i<$n && !$palabraUsada);
+            }
+            while(!$esLetra);
+            // Iniciar la partida de Wordix con la palabra seleccionada
+            $partida = jugarWordix($palabraAleatoria, $jugador);
 
+            // Guardar los datos de la partida en la estructura de datos de partidas
+            $coleccionPartidas[] = $partida;
             break;
         case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
+            // Mostrar una partida
+            $numeroPartida = solicitarNumeroEntre(0, count($coleccionPartidas) - 1);
+            mostrarPartida($coleccionPartidas, $numeroPartida);
             break;
-        
-            //...
+        case 4:
+            // Mostrar la primera partida ganadora
+            $jugador = solicitarJugador();
+            $indice = primerPartidaGanada($coleccionPartidas, $jugador);
+            if ($indice != -1) {
+                mostrarPartida($coleccionPartidas, $indice);
+            } else {
+                echo "El jugador $jugador no ganó ninguna partida.\n";
+            }
+            break;
+        case 5:
+            // Mostrar resumen de Jugador
+            $jugador = solicitarJugador();
+            $resumen = resumenJugador($coleccionPartidas, $jugador);
+            print_r($resumen);
+        break;
     }
 } while ($opcion != 8);
 
