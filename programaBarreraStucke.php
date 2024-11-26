@@ -182,6 +182,29 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
 }
 
 
+/**
+ * solicita el nombre de un jugador en minusculas
+ * @return string $nombre
+ */
+function solicitarJugador()
+{
+    $noEsLetra= false ;
+    do{
+        echo "Ingrese el nombre de un jugador:";
+        $nombre= strtolower(trim(fgets(STDIN)));
+        $primerCaracter= is_string(substr($nombre,0,1));
+        if($primerCaracter === false){
+            echo "Error, el nombre debe comenzar con una letra.";
+        }else{
+            $noEsLetra= true;
+        }
+    }while (!$noEsLetra);
+
+    return $nombre;
+}
+
+
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
