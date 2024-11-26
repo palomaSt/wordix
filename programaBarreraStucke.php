@@ -59,63 +59,37 @@ function cargarPartidas()
    return ($coleccionPartidas);
 }
 
-
-
-
 /**
  * Retorna el resumen de un jugador.
- * @param array $partidas Coleccion de partidas.
+ * @param array $coleccionPartidas Colección de partidas.
  * @param string $jugador Nombre del jugador.
  * @return array Resumen del jugador.
  */
-function resumenJugador($partidas, $jugador) 
-{
+function resumenJugador($coleccionPartidas, $jugador) {
+    // Inicializamos el resumen del jugador
+    $resumen = [
+        "jugador" => $jugador,
+        "partidas" => 0,
+        "puntaje" => 0,
+        "victorias" => 0,
+        "intento1" => 0,
+        "intento2" => 0,
+        "intento3" => 0,
+        "intento4" => 0,
+        "intento5" => 0,
+        "intento6" => 0
+    ];
 
-    foreach($partidas as $partida){
-        if($partida['jugador']=== $jugador){
-        
-            if($partida['puntaje']!=0){
-                $victorias++;
-                if($partida['intentos']===1){
-                    $intento1++;
-                }elseif($partida['intentos']===2){
-                    $intento2++;
-                }elseif($partida['intentos']===3){
-                    $intento3++;
-                }elseif($partida['intentos']===4){
-                    $intento4++;
-                }elseif($partida['intentos']===5){
-                    $intento5++;
-                }else{
-                    $intento6++;
-                }
-            }
-            
-            $contadorPartidas++;
-            $puntaje+= $partida['puntaje'];
+    // Iteramos sobre la colección de partidas
+    foreach ($coleccionPartidas as $partida) {
+        // Verificamos si la partida pertenece al jugador
+        if ($partida['jugador'] == $jugador) {
+            // Actualizamos el resumen del jugador
+            actualizarResumenJugador($resumen, $partida);
         }
     }
-
-    $resumen = 
-    [
-        "jugador" => $jugador,
-        "partidas" => $contadorPartidas,
-        "puntaje" => $puntaje,
-        "victorias" => $victorias,
-        "porcentajeVictorias"=> $victorias/$contadorPartidas,
-        "intento1" => $intento1,
-        "intento2" => $intento2,
-        "intento3" => $intento3,
-        "intento4" => $intento4,
-        "intento5" => $intento5,
-        "intento6" => $intento6
-    ];
-    
-
     return $resumen;
 }
-
-
 
 
 /**
@@ -210,8 +184,37 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
     return $indice-1;
 }
 
-
-
+/**
+ * Actualiza el resumen de un jugador con los datos de una partida.
+ * @param array $resumen Resumen del jugador.
+ * @param array $partida Datos de la partida.
+ */
+function actualizarResumenJugador(&$resumen, $partida) {
+    $resumen['partidas']++;
+    $resumen['puntaje'] += $partida['puntaje'];
+    if ($partida['intentos'] > 0) {
+        $resumen['victorias']++;
+        $intento = $partida['intentos'];
+        if ($intento == 1) {
+            $resumen['intento1']++;
+        } elseif ($intento == 2) 
+        {
+            $resumen['intento2']++;
+        } elseif ($intento == 3) 
+        {
+            $resumen['intento3']++;
+        } elseif ($intento == 4) 
+        {
+            $resumen['intento4']++;
+        } elseif ($intento == 5) 
+        {
+            $resumen['intento5']++;
+        } elseif ($intento == 6) 
+        {
+            $resumen['intento6']++;
+        }
+    }
+}
 
 /**
  * solicita el nombre de un jugador en minusculas
