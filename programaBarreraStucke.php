@@ -246,6 +246,10 @@ function solicitarJugador()
  */
 function mostrarPartidasOrdenadas($partidas) {
     // Usamos uasort para ordenar el array manteniendo las claves originales
+    /*Uasort: Esta función ordena un array tal que los índices de array mantienen sus correlaciones con los 
+    elementos del array con los que están asociados, usando una función de comparación definida por el usuario.
+    Se usa pricipalmente cuando se ordenan arrays asociativos donde el orden del elemento mismo es significante.*/
+
     uasort($partidas, function ($a, $b) {
         // Comparar por el nombre del jugador
         if ($a['jugador'] < $b['jugador']) {
@@ -266,6 +270,7 @@ function mostrarPartidasOrdenadas($partidas) {
 
     // Mostrar la colección ordenada
     print_r($partidas);
+    /*Print_r: print_r() muestra información sobre una variable en una forma que es legible por humanos.*/
 }
 
 
