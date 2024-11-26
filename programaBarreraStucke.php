@@ -285,7 +285,7 @@ function mostrarPartidasOrdenadas($partidas) {
 
 //Proceso:
 
-$partida = jugarWordix("MELON", strtolower("MaJo"));
+//$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
 
@@ -334,8 +334,8 @@ do {
             break;
         case 2:
             $jugador= solicitarJugador();
-            $numeroPalabra = rand(0, count($coleccionPalabras) - 1);
-            $palabraAleatoria = $coleccionPalabras[$numeroPalabra];
+            $numeroPalabra = rand(0, count($palabras) - 1);
+            $palabraAleatoria = $palabras[$numeroPalabra];
             $palabraElegida=$palabraAleatoria;
             do
             {
@@ -359,19 +359,19 @@ do {
             $partida = jugarWordix($palabraAleatoria, $jugador);
 
             // Guardar los datos de la partida en la estructura de datos de partidas
-            $coleccionPartidas[] = $partida;
+            $partidas[] = $partida;
             break;
         case 3: 
             // Mostrar una partida
-            $numeroPartida = solicitarNumeroEntre(0, count($coleccionPartidas) - 1);
-            mostrarPartida($coleccionPartidas, $numeroPartida);
+            $numeroPartida = solicitarNumeroEntre(0, count($partidas) - 1);
+            mostrarPartida($partidas, $numeroPartida);
             break;
         case 4:
             // Mostrar la primera partida ganadora
             $jugador = solicitarJugador();
-            $indice = primerPartidaGanada($coleccionPartidas, $jugador);
+            $indice = primerPartidaGanada($partidas, $jugador);
             if ($indice != -1) {
-                mostrarPartida($coleccionPartidas, $indice);
+                mostrarPartida($partidas, $indice);
             } else {
                 echo "El jugador $jugador no ganó ninguna partida.\n";
             }
@@ -379,8 +379,26 @@ do {
         case 5:
             // Mostrar resumen de Jugador
             $jugador = solicitarJugador();
-            $resumen = resumenJugador($coleccionPartidas, $jugador);
+            $resumen = resumenJugador($partidas, $jugador);
             print_r($resumen);
+        break;
+        case 6:
+            // Mostrar listado de partidas ordenadas por jugador y por palabra
+            mostrarPartidasOrdenadas($partidas);
+        break;
+        case 7:
+            echo "Ingrese la palabra a agregar al juego:\n";
+            $palabra=trim(fgets(STDIN));
+            if (strlen($palabra) == 5) 
+            {
+                echo "La palabra fue agregada con éxito\n";
+                echo "La palabra ingresada es: $palabra\n";
+            } else 
+            {
+                echo "La palabra debe tener exactamente 5 caracteres.\n";
+            }
+            $palabra = strtoupper($palabra); // Convertir la palabra a mayúsculas
+            agregarPalabra($palabras, $palabra);
         break;
     }
 } while ($opcion != 8);
