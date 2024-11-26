@@ -203,6 +203,33 @@ function solicitarJugador()
     return $nombre;
 }
 
+/**
+ * Ordena y muestra las partidas por nombre de jugador y por palabra
+ * @param array $partidas
+ */
+function mostrarPartidasOrdenadas($partidas) {
+    // Usamos uasort para ordenar el array manteniendo las claves originales
+    uasort($partidas, function ($a, $b) {
+        // Comparar por el nombre del jugador
+        if ($a['jugador'] < $b['jugador']) {
+            return -1; 
+        } elseif ($a['jugador'] > $b['jugador']) {
+            return 1; 
+        } else {
+            // Si los nombres son iguales, comparar por la palabra
+            if ($a['palabra'] < $b['palabra']) {
+                return -1; 
+            } elseif ($a['palabra'] > $b['palabra']) {
+                return 1; 
+            } else {
+                return 0; 
+            }
+        }
+    });
+
+    // Mostrar la colección ordenada
+    print_r($partidas);
+}
 
 
 /**************************************/
