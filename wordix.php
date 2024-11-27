@@ -356,7 +356,7 @@ function obtenerPuntajeWordix($nroIntento, $palabra)
         }elseif($letra<="M"){
             $puntajeLetras+=2; //Consonantes hasta la M inclusive valen 2 puntos
         }else{
-            $punteLetras+=3; //Consonantes despues de la M valen 3 puntos
+            $puntajeLetras+=3; //Consonantes despues de la M valen 3 puntos
         }
     }
 
@@ -395,7 +395,7 @@ function jugarWordix($palabraWordix, $nombreUsuario)
 
     if ($ganoElIntento) {
         $nroIntento--;
-        $puntaje = obtenerPuntajeWordix($arregloDeIntentosWordix[$nroIntento-1],$nroIntento);
+        $puntaje = obtenerPuntajeWordix($nroIntento ,$arregloDeIntentosWordix[$nroIntento-1]);
         echo "Adivinó la palabra Wordix en el intento " . $nroIntento . "!: " . $palabraIntento . " Obtuvo $puntaje puntos!";
     } else {
         $nroIntento = 0; //reset intento

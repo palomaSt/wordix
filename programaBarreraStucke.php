@@ -131,7 +131,7 @@ function agregarPalabra($coleccionPalabras, $palabra)
 
 
 /**
- * Busca la primer partida ganada de un jugador
+ * Busca el indice de la primer partida ganada de un jugador
  * @param array $coleccionPartidas
  * @param string $jugador
  * @return int Indice de la partida, -1 si no ganó ninguna partida
@@ -144,16 +144,18 @@ function primerPartidaGanada($coleccionPartidas, $jugador)
     $partidaGanada=0;
     do{
         //Buscamos un puntaje mayor a 0 
-        $partidaGanada=$coleccionPartidas['jugador']==$jugador["puntaje"];
+        if($coleccionPartidas[$indice]['jugador'] === $jugador){
+            $partidaGanada= $coleccionPartidas[$indice]['puntaje'] ;
+        }
 
         $indice++;
-    }while($indice<$cantPartidas && $partidaGanada==0);
+    }while($indice<$cantPartidas && $partidaGanada===0);
     
     if($partidaGanada===0){
-        $indice=0;
+        $indice=-1;
     }
 
-    return $indice-1;
+    return $indice;
 }
 
 
@@ -293,7 +295,7 @@ function mostrarPartidasOrdenadas($coleccionPartidas) {
  * array $partidas
  * array $palabras
  * int $opcion
- * int $palabraElegida
+ * int $ $numeroPalabra
  * string $palabraElegida
  * bool $esLetra
  * int $n
@@ -328,38 +330,39 @@ do {
         case 1: 
             // Jugar al wordix con una palabra elegida
             $jugador= solicitarJugador();
+            
             do{
                 echo "Ingrese un número de palabra para jugar:";
-                $palabraElegida= trim(fgets(STDIN));
+                $numeroPalabra= trim(fgets(STDIN));
 
                 // Verifico que ingrese un caracter de tipo numérico
-                $esLetra= esPalabra($palabraElegida); 
-                if($esLetra=== true){
+                $esLetra= esPalabra( $numeroPalabra); 
+                if($esLetra === true){
                     echo "Error, debe ser numérico";
                 }else{
-                    $palabraElegida= $palabras[$palabraElegida-1];
+                    $palabraElegida= $palabras[ $numeroPalabra-1];
 
                     //Verifico que no haya utilizado la palabra
                     $palabraUsada= false;
                     $n= count($partidas); //Cantidad de partidas
                     $i=0;
                     do{
-                      if($partidas['jugador']===$jugador){
-                            if($partidas['palabraWordix']===$palabraElegida){
+                      if($partidas[$i]['jugador']===$jugador){
+                            if($partidas[$i]['palabraWordix']===$palabraElegida){
                                 echo "Error, usted ya uso esta palabra.";
                                 $palabraUsada= true;
                             }
                         }
                         $i++;
                     }while($i<$n && !$palabraUsada);
-
-                    // Iniciar la partida de Wordix con la palabra seleccionada
-                    $partida= jugarWordix($palabraElegida,$jugador);
-
-                    // Guardar los datos de la partida en la estructura de datos de partidas
-                    $partidas[]=$partida;
                 }
-            }while(!$esLetra);
+            }while($esLetra === true);
+
+            // Iniciar la partida de Wordix con la palabra seleccionada
+            $partida= jugarWordix($palabraElegida,$jugador);
+
+            // Guardar los datos de la partida en la estructura de datos de partidas
+            $partidas[]=$partida;
 
         break;
 
@@ -375,8 +378,8 @@ do {
             $n= count($partidas); //Cantidad de partidas
             $i=0;
             do{
-                if($partidas['jugador']===$jugador){
-                    if($partidas['palabraWordix']===$palabraAleatoria){
+                if($partidas[$i]['jugador']===$jugador){
+                    if($partidas[$i]['palabraWordix']===$palabraAleatoria){
                         $numeroPalabra = rand(0, count($palabras) - 1);
                         $palabraAleatoria = $palabras[$numeroPalabra];
                         $palabraUsada= true;
@@ -396,7 +399,9 @@ do {
 
         case 3: 
             // Mostrar una partida
-            $numeroPartida = solicitarNumeroEntre(0, count($partidas) - 1);
+            $n= count($partidas); //Cantidad de partidas
+            echo "Ingrese numero de partida: ";
+            $numeroPartida = solicitarNumeroEntre(0, ($n - 1));
             mostrarPartida($numeroPartida, $partidas);
         break;
 
@@ -423,7 +428,7 @@ do {
             echo "Jugador: " .$jugador."\n";
             echo "Partidas: ".$resumen['partidas']."\n";
             echo "Puntaje: ".$resumen['puntaje']."\n";
-            echo "Victorias: ".$resume['victorias']."\n";
+            echo "Victorias: ".$resumen['victorias']."\n";
             $porcentajeV= ($resumen['victorias']/$resumen['partidas']);
             echo "Porcentaje Victorias: ".$porcentajeV."\n";
             echo "Adivinadas: "."\n";
