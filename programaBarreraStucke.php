@@ -81,7 +81,7 @@ function seleccionarOpcion()
     echo "***************************************************\n";
     echo "Seleccione una opción:";
 
-    $opcion = solicitarNumeroEntre(1,7);
+    $opcion = solicitarNumeroEntre(1,8);
 
     return $opcion;
 }
@@ -122,8 +122,8 @@ function mostrarPartida($numeroDePartida,$coleccionPartidas)
  */ 
 function agregarPalabra($coleccionPalabras, $palabra)
 {
-    $coleccionPalabras[]= $palabra;
-
+    array_push($coleccionPalabras, $palabra);
+    print_r($coleccionPalabras);
     return $coleccionPalabras;
 }
 
@@ -265,9 +265,9 @@ function mostrarPartidasOrdenadas($coleccionPartidas) {
             return 1; 
         } else {
             // Si los nombres son iguales, comparar por la palabra
-            if ($a['palabra'] < $b['palabra']) {
+            if ($a['palabraWordix'] < $b['palabraWordix']) {
                 return -1; 
-            } elseif ($a['palabra'] > $b['palabra']) {
+            } elseif ($a['palabraWordix'] > $b['palabraWordix']) {
                 return 1; 
             } else {
                 return 0; 
@@ -393,7 +393,7 @@ do {
             $partida = jugarWordix($palabraAleatoria, $jugador);
 
             // Guardar los datos de la partida en la estructura de datos de partidas
-            $partidas[] = $partida;
+            array_push($partidas,$partida);
         break;
 
 
@@ -451,7 +451,7 @@ do {
         case 7:
             // Agregar palabra de 5 letras
             $palabra= leerPalabra5Letras();
-            agregarPalabra($palabras, $palabra);
+            $palabras=agregarPalabra($palabras, $palabra);
             echo "La palabra fue agregada con éxito\n";
             echo "La palabra ingresada es: $palabra\n";
         break;
