@@ -69,15 +69,15 @@ function cargarPartidas()
 function seleccionarOpcion()
 {
     echo "***************************************************\n";
-    echo "Menú de opciones:";
-    echo "1) Jugar al Wordix con una palabra elegida";
-    echo "2) Jugar al Wordix con una palabra aleatoria";
-    echo "3) Mostrar una partida";
-    echo "4) Mostrar la primer partida ganadora";
-    echo "5) Mostrar resumen de Jugador";
-    echo "6) Mostrar listado de partidas ordenadas por jugador y por palabra";
-    echo "7) Agregar una palabra de 5 letras a Wordix";
-    echo "8) Salir";
+    echo "Menú de opciones:\n";
+    echo "1) Jugar al Wordix con una palabra elegida\n";
+    echo "2) Jugar al Wordix con una palabra aleatoria\n";
+    echo "3) Mostrar una partida\n";
+    echo "4) Mostrar la primer partida ganadora\n";
+    echo "5) Mostrar resumen de Jugador\n";
+    echo "6) Mostrar listado de partidas ordenadas por jugador y por palabra\n";
+    echo "7) Agregar una palabra de 5 letras a Wordix\n";
+    echo "8) Salir\n";
     echo "***************************************************\n";
     echo "Seleccione una opción:";
 
