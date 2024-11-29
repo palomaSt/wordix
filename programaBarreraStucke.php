@@ -319,35 +319,19 @@ function mostrarPartidasOrdenadas($coleccionPartidas) {
 //Declaración de variables:
 
 /**
- * array $partidas
- * array $palabras
- * int $opcion
- * int $ $numeroPalabra
- * string $palabraElegida
- * bool $esLetra
- * int $n
- * int $i
- * bool $palabraUsada
- * array $partida
- * string $jugador
- * int $numeroPartida
- * int $indice
- * array $resumen
+ * array $partidas, $palabras, $partida, $resumen
+ * int $opcion, $numeroPalabra, $n, $i, $numeroPartida, $indice
+ * string $palabraElegida, $jugador
+ * bool $esLetra, $palabraUsada
  */
 
 //Inicialización de variables:
 
-
-//Proceso:
-
-//$partida = jugarWordix("MELON", strtolower("MaJo"));
-//print_r($partida);
-//imprimirResultado($partida);
-
-
+$opcion=0;
 $partidas= cargarPartidas();
 $palabras= cargarColeccionPalabras();
 
+//Proceso:
 
 do {
     $opcion = seleccionarOpcion();
