@@ -343,20 +343,31 @@ function esIntentoGanado($estructuraPalabraIntento)
  */
 function obtenerPuntajeWordix($nroIntento, $palabra)  
 {
-    //Puntaje base según el número de intentos
-    $puntajeBase=7 -$nroIntento; //6 puntos si adivina en el primer intento, 5 en el segundo, etc.
+    // Puntaje base según el número de intentos
+    $puntajeBase = 7 - $nroIntento; // 6 puntos si adivina en el primer intento, 5 en el segundo, etc.
 
-    //Puntaje adicional por cada letra de la palabra
-    $puntajeLetras=0;
+    // Puntaje adicional por cada letra de la palabra
+    $puntajeLetras = 0;
 
-    for($i=0;$i<5;$i++){
-        $letra= $palabra[$i];
-        if(in_array($letra,["A","E","I","O","U"])){
-            $puntajeLetras+=1; //Vocales valen 1 punto
-        }elseif($letra<="M"){
-            $puntajeLetras+=2; //Consonantes hasta la M inclusive valen 2 puntos
-        }else{
-            $puntajeLetras+=3; //Consonantes despues de la M valen 3 puntos
+    $vocales = ["A", "E", "I", "O", "U"];
+
+    for ($i = 0; $i < 5; $i++) {
+        $letra = $palabra[$i];
+        $esVocal = false;
+
+        foreach ($vocales as $vocal) {
+            if ($letra == $vocal) {
+                $esVocal = true;
+                break;
+            }
+        }
+
+        if ($esVocal) {
+            $puntajeLetras += 1; // Vocales valen 1 punto
+        } elseif ($letra <= "M") {
+            $puntajeLetras += 2; // Consonantes hasta la M inclusive valen 2 puntos
+        } else {
+            $puntajeLetras += 3; // Consonantes después de la M valen 3 puntos
         }
     }
 
