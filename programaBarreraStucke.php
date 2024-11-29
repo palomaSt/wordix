@@ -122,8 +122,23 @@ function mostrarPartida($numeroDePartida,$coleccionPartidas)
  */ 
 function agregarPalabra($coleccionPalabras, $palabra)
 {
-    array_push($coleccionPalabras, $palabra);
-    print_r($coleccionPalabras);
+
+    $i=0;
+    $cantPalabras= count($coleccionPalabras);
+    //Verificamos que no se encuentre en la coleccion
+    while($i<$cantPalabras && $coleccionPalabras[$i] != $palabra){
+        $i++;
+    }
+    //La agregamos o descartamos
+    if ($i>=$cantPalabras){
+        $coleccionPalabras[$cantPalabras]=$palabra;
+        echo "********************************** \n";
+        echo "Se agregó la palabra " . $palabra. "\n";
+        echo "********************************** \n";
+    }else{
+        echo "La palabra ". $palabra." ya existe.";
+    }
+
     return $coleccionPalabras;
 }
 
@@ -248,6 +263,34 @@ function solicitarJugador()
 
 
 /**
+ * Compara los nombres del arreglo, los ordena alfabeticamente segun el nombre y luego segun la palabra.
+ * @param array $a
+ * @param array $b
+ * @return int //0 si son iguales, -1 si es $a<$b y 1 si $a>$b
+ */
+function compararCadenas($a, $b)
+{
+    $comparacion=0; //define si son iguales es 0, si es menor -1 y si es mayor 1
+    if($a['jugador']< $b['jugador']){
+        $comparacion=-1;
+    }elseif($a['jugador']>$b['jugador']){
+        $comparacion=1;
+    }else{
+        if($a['palabraWordix']<$b['palabraWordix']){
+            $comparacion=-1;
+        }elseif($a['palabraWordix']>$b['palabraWordix']){
+            $comparacion=1;
+        }else{
+            $comparacion=0;
+        }
+    }
+    return $comparacion;
+}
+
+
+
+
+/**
  * Ordena y muestra las partidas por nombre de jugador y por palabra
  * @param array $coleccionPartidas
  */
@@ -257,23 +300,7 @@ function mostrarPartidasOrdenadas($coleccionPartidas) {
     elementos del array con los que están asociados, usando una función de comparación definida por el usuario.
     Se usa pricipalmente cuando se ordenan arrays asociativos donde el orden del elemento mismo es significante.*/
 
-    uasort($coleccionPartidas, function ($a, $b) {
-        // Comparar por el nombre del jugador
-        if ($a['jugador'] < $b['jugador']) {
-            return -1; 
-        } elseif ($a['jugador'] > $b['jugador']) {
-            return 1; 
-        } else {
-            // Si los nombres son iguales, comparar por la palabra
-            if ($a['palabraWordix'] < $b['palabraWordix']) {
-                return -1; 
-            } elseif ($a['palabraWordix'] > $b['palabraWordix']) {
-                return 1; 
-            } else {
-                return 0; 
-            }
-        }
-    });
+    uasort($coleccionPartidas, 'compararCadenas');
 
     // Mostrar la colección ordenada
     print_r($coleccionPartidas);
@@ -452,8 +479,6 @@ do {
             // Agregar palabra de 5 letras
             $palabra= leerPalabra5Letras();
             $palabras=agregarPalabra($palabras, $palabra);
-            echo "La palabra fue agregada con éxito\n";
-            echo "La palabra ingresada es: $palabra\n";
         break;
 
     }
