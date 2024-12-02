@@ -250,7 +250,7 @@ function solicitarJugador()
         $nombre= strtolower(trim(fgets(STDIN)));
         $primerCaracter= esPalabra(substr($nombre,0,1));
         if($primerCaracter === false){
-            echo "Error, el nombre debe comenzar con una letra.";
+            echo "Error, el nombre debe comenzar con una letra.\n";
         }else{
             $noEsLetra= true;
         }
@@ -343,37 +343,31 @@ do {
             $jugador= solicitarJugador();
             
             do{
+                $cantPalabras= count($palabras);
                 echo "Ingrese un número de palabra para jugar:";
-                $numeroPalabra= trim(fgets(STDIN));
+                $numeroPalabra= solicitarNumeroEntre(0,$cantPalabras-1);
+                $palabraElegida= $palabras[ $numeroPalabra];
 
-                // Verifico que ingrese un caracter de tipo numérico
-                $esLetra= esPalabra( $numeroPalabra); 
-                if($esLetra === true){
-                    echo "Error, debe ser numérico";
-                }else{
-                    $palabraElegida= $palabras[ $numeroPalabra-1];
-
-                    //Verifico que no haya utilizado la palabra
-                    $palabraUsada= false;
-                    $n= count($partidas); //Cantidad de partidas
-                    $i=0;
-                    do{
-                      if($partidas[$i]['jugador']===$jugador){
-                            if($partidas[$i]['palabraWordix']===$palabraElegida){
-                                echo "Error, usted ya uso esta palabra.";
-                                $palabraUsada= true;
-                            }
+                //Verifico que no haya utilizado la palabra
+                $palabraUsada= false;
+                $n= count($partidas); //Cantidad de partidas
+                $i=0;
+                do{
+                    if($partidas[$i]['jugador']===$jugador){
+                        if($partidas[$i]['palabraWordix']===$palabraElegida){
+                            echo "Error, usted ya uso esta palabra.";
+                            $palabraUsada= true;
                         }
-                        $i++;
-                    }while($i<$n && !$palabraUsada);
-                }
-            }while($esLetra === true);
+                    }
+                    $i++;
+                }while($i<$n && !$palabraUsada);
+            }while($palabraUsada===true);
 
             // Iniciar la partida de Wordix con la palabra seleccionada
             $partida= jugarWordix($palabraElegida,$jugador);
 
             // Guardar los datos de la partida en la estructura de datos de partidas
-            $partidas[]=$partida;
+            $partidas[$n]=$partida;
 
         break;
 
@@ -381,7 +375,8 @@ do {
         case 2:
             // Jugar al wordix con una palabra aleatoria
             $jugador= solicitarJugador();
-            $numeroPalabra = rand(0, count($palabras) - 1);
+            $cantPalabras= count($palabras);
+            $numeroPalabra = rand(0, $cantPalabras - 1);
             $palabraAleatoria = $palabras[$numeroPalabra];
 
             //Verifico que no haya utilizado la palabra
@@ -404,7 +399,7 @@ do {
             $partida = jugarWordix($palabraAleatoria, $jugador);
 
             // Guardar los datos de la partida en la estructura de datos de partidas
-            array_push($partidas,$partida);
+            $partidas[$n]=$partida;
         break;
 
 
