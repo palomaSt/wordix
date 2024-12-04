@@ -98,9 +98,9 @@ function mostrarPartida($numeroDePartida,$coleccionPartidas)
 {
     echo "***************************************************\n";
     echo "Partida WORDIX ".($numeroDePartida-1).": palabra ".$coleccionPartidas[($numeroDePartida-1)]["palabraWordix"]."\n";
-    echo "Jugador: ".$coleccionPartidas[($numeroDePartida-1)]["jugador"]."\n";
-    echo "Puntaje: ".$coleccionPartidas[($numeroDePartida-1)]["puntaje"]." puntos\n";
-    if($coleccionPartidas[($numeroDePartida-1)]["intentos"]==0)
+    echo "Jugador: ".$coleccionPartidas[($numeroDePartida)]["jugador"]."\n";
+    echo "Puntaje: ".$coleccionPartidas[($numeroDePartida)]["puntaje"]." puntos\n";
+    if($coleccionPartidas[($numeroDePartida)]["intentos"]==0)
     {
         echo "Intento: No adivinó la palabra";
     }
