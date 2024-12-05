@@ -435,8 +435,15 @@ do {
             echo "Partidas: ".$resumen['partidas']."\n";
             echo "Puntaje: ".$resumen['puntaje']."\n";
             echo "Victorias: ".$resumen['victorias']."\n";
-            $porcentajeV= ($resumen['victorias']/$resumen['partidas']);
-            echo "Porcentaje Victorias: ".$porcentajeV."\n";
+            if($resumen['victorias']==0)
+            {
+                $porcentajeV=0;
+            } 
+            else
+            {
+                $porcentajeV= ($resumen['victorias']/$resumen['partidas'])*100;
+            }
+            echo "Porcentaje Victorias: ".$porcentajeV."%\n";    
             echo "Adivinadas: "."\n";
             echo"       Intento 1: ".$resumen['intento1']."\n";
             echo"       Intento 2: ".$resumen['intento2']."\n";
