@@ -352,9 +352,6 @@ function obtenerPuntajeWordix($nroIntento, $palabra)
     // Puntaje adicional por cada letra de la palabra
     $puntajeLetras = 0;
 
-    //Guardamos en un array a la palabra
-    //$palabraColeccionada= str_split($palabra);
-
     for ($i = 0; $i < 5; $i++) {
         $letra = $palabra[$i]; //Guardamos la letra a analizar
         
