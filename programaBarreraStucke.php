@@ -407,7 +407,7 @@ do {
             // Mostrar una partida
             $n= count($partidas); //Cantidad de partidas
             echo "Ingrese numero de partida: ";
-            $numeroPartida = solicitarNumeroEntre(0, ($n - 1));
+            $numeroPartida = solicitarNumeroEntre(1, ($n));
             mostrarPartida($numeroPartida, $partidas);
         break;
 
