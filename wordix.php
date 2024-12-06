@@ -349,28 +349,21 @@ function obtenerPuntajeWordix($nroIntento, $palabra)
     // Puntaje adicional por cada letra de la palabra
     $puntajeLetras = 0;
 
-    $vocales = ["A", "E", "I", "O", "U"];
+    //Guardamos en un array a la palabra
+    $palabraColeccionada= str_split($palabra);
 
     for ($i = 0; $i < 5; $i++) {
-        $letra = $palabra[$i];
-        $esVocal = false;
-
-        foreach ($vocales as $vocal) {
-            if ($letra == $vocal) {
-                $esVocal = true;
-                break;
-            }
+        $letra = $palabraColeccionada[$i]; //Guardamos la letra a analizar
+        
+        if($letra == "A" || $letra == "E" || $letra == "I" || $letra == "O" || $letra == "U"){
+            $puntajeLetras+=1; //Es vocal, suma 1 pto.
+        } elseif($letra<="M"){
+            $puntajeLetras+=2; //Es consonante <= a M, suma 2ptos.
+        }else{
+            $puntajeLetras+=3; //Es consonante > a M, suma 3ptos.
         }
-
-        if ($esVocal) {
-            $puntajeLetras += 1; // Vocales valen 1 punto
-        } elseif ($letra <= "M") {
-            $puntajeLetras += 2; // Consonantes hasta la M inclusive valen 2 puntos
-        } else {
-            $puntajeLetras += 3; // Consonantes después de la M valen 3 puntos
-        }
+        
     }
-
     return $puntajeBase + $puntajeLetras;
 }
 
