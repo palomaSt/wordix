@@ -97,10 +97,10 @@ function seleccionarOpcion()
 function mostrarPartida($numeroDePartida,$coleccionPartidas)
 {
     echo "***************************************************\n";
-    echo "Partida WORDIX ".($numeroDePartida-1).": palabra ".$coleccionPartidas[($numeroDePartida-1)]["palabraWordix"]."\n";
-    echo "Jugador: ".$coleccionPartidas[($numeroDePartida)]["jugador"]."\n";
-    echo "Puntaje: ".$coleccionPartidas[($numeroDePartida)]["puntaje"]." puntos\n";
-    if($coleccionPartidas[($numeroDePartida)]["intentos"]==0)
+    echo "Partida WORDIX ".($numeroDePartida).": palabra ".$coleccionPartidas[($numeroDePartida-1)]["palabraWordix"]."\n";
+    echo "Jugador: ".$coleccionPartidas[($numeroDePartida-1)]["jugador"]."\n";
+    echo "Puntaje: ".$coleccionPartidas[($numeroDePartida-1)]["puntaje"]." puntos\n";
+    if($coleccionPartidas[($numeroDePartida-1)]["intentos"]==0)
     {
         echo "Intento: No adivinó la palabra";
     }
@@ -345,8 +345,8 @@ do {
             do{
                 $cantPalabras= count($palabras);
                 echo "Ingrese un número de palabra para jugar:";
-                $numeroPalabra= solicitarNumeroEntre(0,$cantPalabras-1);
-                $palabraElegida= $palabras[ $numeroPalabra];
+                $numeroPalabra= solicitarNumeroEntre(1 ,$cantPalabras);
+                $palabraElegida= $palabras[ $numeroPalabra-1];
 
                 //Verifico que no haya utilizado la palabra
                 $palabraUsada= false;
